@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tukang Jaya – Toko Peralatan Bangunan</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFC400;--k:#1d1d1b;--c:#e7e5df;--w:#fbfaf7;--b:#2a5d8f;--r:#c8372d}
+*{box-sizing:border-box;margin:0}
+body{font-family:Barlow,Arial,sans-serif;background:var(--w);color:var(--k);line-height:1.5;
+background-image:linear-gradient(#0000000a 1px,transparent 1px),linear-gradient(90deg,#0000000a 1px,transparent 1px);background-size:32px 32px}
+h1,h2,h3,.logo,.btn,nav a{font-family:'Barlow Condensed',Impact,sans-serif;letter-spacing:.02em}
+.tape{height:14px;background:repeating-linear-gradient(-45deg,var(--y) 0 18px,var(--k) 18px 36px)}
+header{background:var(--k);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:1050px;margin:auto;display:flex;align-items:center;gap:16px;padding:10px 16px;flex-wrap:wrap}
+.logo{font-size:30px;font-weight:800;color:var(--y);text-decoration:none;margin-right:auto}
+.logo span{color:#fff}
+nav{display:flex;gap:6px;align-items:center}
+nav a{color:#fff;text-decoration:none;font-size:19px;font-weight:600;padding:4px 12px;border:2px solid transparent}
+nav a:hover,nav a:focus-visible{border-color:var(--y);outline:none}
+.badge{background:var(--y);color:var(--k);padding:0 7px;margin-left:4px}
+main{max-width:1050px;margin:auto;padding:24px 16px 48px;min-height:70vh}
+.hero{background:var(--y);border:3px solid var(--k);box-shadow:8px 8px 0 var(--k);padding:32px 24px;display:grid;gap:12px;margin-bottom:32px}
+.hero h1{font-size:clamp(38px,8vw,72px);line-height:.95;font-weight:800;text-transform:uppercase}
+.hero p{max-width:480px;font-size:18px}
+.btn{display:inline-block;background:var(--k);color:#fff;border:3px solid var(--k);padding:8px 22px;font-size:20px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn:hover,.btn:focus-visible{background:var(--y);color:var(--k);outline:none}
+.btn.alt{background:#fff;color:var(--k)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filters button{font:600 18px 'Barlow Condensed',sans-serif;border:2px solid var(--k);background:#fff;padding:2px 14px;cursor:pointer}
+.filters button.on{background:var(--k);color:var(--y)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.card{background:#fff;border:2px solid var(--k);text-decoration:none;color:inherit;display:block}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--k)}
+.card .img,.pimg{display:grid;place-items:center;aspect-ratio:1;border-bottom:2px solid var(--k)}
+.card .img svg{width:70%}
+.card div.t{padding:12px}
+.card h3{font-size:24px;line-height:1.1}
+.price{font-weight:500;color:var(--b);font-size:18px}
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.pimg{border:3px solid var(--k);box-shadow:8px 8px 0 var(--k)}.pimg svg{width:75%}
+.detail h1{font-size:52px;line-height:1}
+.detail ul{padding-left:20px;margin:12px 0}
+.qty{display:flex;align-items:center;gap:10px;margin:16px 0}
+.qty button{width:36px;height:36px;border:2px solid var(--k);background:#fff;font-size:20px;cursor:pointer}
+.crumb{margin-bottom:16px}.crumb a{color:var(--b)}
+.box{max-width:400px;margin:20px auto;background:#fff;border:3px solid var(--k);box-shadow:8px 8px 0 var(--k);padding:28px}
+.box h1{font-size:44px}
+label{display:block;margin-top:14px;font-weight:500}
+input{width:100%;padding:10px;border:2px solid var(--k);font:inherit;margin-top:4px}
+.msg{margin-top:12px;color:var(--r);min-height:24px}
+table{width:100%;border-collapse:collapse;background:#fff}
+td,th{padding:10px;border-bottom:2px solid var(--c);text-align:left}
+footer{background:var(--k);color:#ddd}
+.fgrid{max-width:1050px;margin:auto;padding:28px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+footer h3{color:var(--y);font-size:22px}footer a{color:#ddd;display:block}
+.copy{text-align:center;padding:10px;font-size:14px;background:#000}
+@media(max-width:700px){.detail{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="tape"></div>
+<header>
+ <div class="bar">
+  <a class="logo" href="#/">TUKANG<span>JAYA</span></a>
+  <nav>
+   <a href="#/">Produk</a>
+   <a href="#/keranjang">Keranjang<span class="badge" id="cnt">0</span></a>
+   <a href="#/login" id="loginLink">Masuk</a>
+  </nav>
+ </div>
+</header>
+<main id="app"></main>
+<div class="tape"></div>
+<footer>
+ <div class="fgrid">
+  <div><h3>Tukang Jaya</h3><p>Peralatan dan material bangunan untuk tukang, kontraktor, dan renovasi rumah.</p></div>
+  <div><h3>Kategori</h3><a href="#/">Perkakas</a><a href="#/">Material</a><a href="#/">Keselamatan</a></div>
+  <div><h3>Kontak</h3><p>Jl. Industri No. 12, Jakarta<br>0812-0000-0000<br>halo@tukangjaya.example</p><p>Buka Sen–Sab, 07.00–17.00</p></div>
+ </div>
+ <div class="copy">© 2026 Tukang Jaya. Semua hak dilindungi.</div>
+</footer>
+
+<script>
+/* ===== DATA PRODUK (gambar = SVG bawaan, tanpa file eksternal) ===== */
+const S=(bg,body)=>`<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${body}</svg>`;
+const ICON={
+palu:`<rect x="55" y="30" width="12" height="80" rx="3" fill="#a9743f" transform="rotate(35 60 60)"/><rect x="22" y="18" width="62" height="22" fill="#555" stroke="#1d1d1b" stroke-width="3" transform="rotate(35 60 60)"/>`,
+bor:`<rect x="14" y="30" width="62" height="28" rx="6" fill="#2a5d8f" stroke="#1d1d1b" stroke-width="3"/><rect x="40" y="56" width="22" height="48" rx="5" fill="#1d1d1b"/><rect x="76" y="40" width="26" height="8" fill="#999"/><rect x="100" y="42" width="14" height="4" fill="#666"/>`,
+gergaji:`<polygon points="10,70 100,20 108,36 30,92" fill="#cfcfcf" stroke="#1d1d1b" stroke-width="3"/><path d="M30 92 L10 70 L18 66 L36 86Z" fill="#c8372d" stroke="#1d1d1b" stroke-width="3"/>`,
+semen:`<rect x="24" y="20" width="72" height="84" rx="4" fill="#9a9a96" stroke="#1d1d1b" stroke-width="3"/><rect x="34" y="42" width="52" height="30" fill="#fff"/><text x="60" y="63" font-size="16" font-weight="800" text-anchor="middle" fill="#c8372d">SEMEN</text>`,
+cat:`<path d="M26 40 L34 104 H86 L94 40Z" fill="#fff" stroke="#1d1d1b" stroke-width="3"/><ellipse cx="60" cy="40" rx="34" ry="10" fill="#c8372d" stroke="#1d1d1b" stroke-width="3"/><rect x="26" y="62" width="68" height="20" fill="#c8372d"/>`,
+helm:`<path d="M20 78 A40 40 0 0 1 100 78Z" fill="#FFC400" stroke="#1d1d1b" stroke-width="3"/><rect x="12" y="78" width="96" height="10" rx="4" fill="#FFC400" stroke="#1d1d1b" stroke-width="3"/><rect x="54" y="30" width="12" height="46" fill="#e0a800"/>`,
+meteran:`<circle cx="52" cy="62" r="34" fill="#FFC400" stroke="#1d1d1b" stroke-width="3"/><circle cx="52" cy="62" r="12" fill="#fbfaf7" stroke="#1d1d1b" stroke-width="3"/><rect x="82" y="78" width="30" height="10" fill="#eee" stroke="#1d1d1b" stroke-width="3"/>`,
+tang:`<path d="M44 12 L64 70 L50 106" fill="none" stroke="#1d1d1b" stroke-width="10" stroke-linecap="round"/><path d="M76 12 L56 70 L70 106" fill="none" stroke="#c8372d" stroke-width="10" stroke-linecap="round"/><circle cx="60" cy="60" r="6" fill="#999"/>`
+};
+const P=[
+{id:"palu-kambing",nama:"Palu Kambing 16 oz",kat:"Perkakas",harga:65000,ic:"palu",bg:"#ffe9a6",desk:"Palu gagang kayu dengan kepala baja tempa untuk memaku dan mencabut paku.",spek:["Bobot kepala 16 oz","Gagang kayu jati","Kepala baja karbon"]},
+{id:"bor-listrik",nama:"Bor Listrik 13 mm",kat:"Perkakas",harga:420000,ic:"bor",bg:"#cfe2f3",desk:"Bor listrik 600 W dengan kecepatan variabel, cocok untuk kayu, besi, dan tembok.",spek:["Daya 600 W","Chuck 13 mm","Putaran maju dan mundur"]},
+{id:"gergaji-besi",nama:"Gergaji Besi Rangka",kat:"Perkakas",harga:55000,ic:"gergaji",bg:"#f4d0cc",desk:"Gergaji tangan dengan rangka baja dan mata gergaji yang bisa diganti.",spek:["Mata gergaji 12 inci","Rangka baja","Gagang anti slip"]},
+{id:"semen-50kg",nama:"Semen Portland 50 kg",kat:"Material",harga:68000,ic:"semen",bg:"#e0dfda",desk:"Semen Portland untuk pondasi, plesteran, dan pengecoran skala rumah tangga.",spek:["Berat 50 kg","Kemasan kantong kertas","Simpan di tempat kering"]},
+{id:"cat-tembok",nama:"Cat Tembok Putih 5 kg",kat:"Material",harga:185000,ic:"cat",bg:"#f4d0cc",desk:"Cat tembok interior daya tutup tinggi, tidak berbau menyengat, cepat kering.",spek:["Isi 5 kg","Daya sebar sekitar 40 m²","Untuk dinding dalam"]},
+{id:"helm-proyek",nama:"Helm Proyek Kuning",kat:"Keselamatan",harga:48000,ic:"helm",bg:"#fff1bf",desk:"Helm keselamatan kerja dengan tali dagu dan suspensi yang bisa diatur.",spek:["Bahan ABS","Suspensi 4 titik","Warna kuning"]},
+{id:"meteran-5m",nama:"Meteran Gulung 5 m",kat:"Perkakas",harga:25000,ic:"meteran",bg:"#fff1bf",desk:"Meteran gulung dengan pengunci pita dan klip sabuk untuk ukur cepat di lapangan.",spek:["Panjang 5 m","Pita baja 19 mm","Klip sabuk"]},
+{id:"tang-kombinasi",nama:"Tang Kombinasi 8 inci",kat:"Perkakas",harga:42000,ic:"tang",bg:"#cfe2f3",desk:"Tang serbaguna untuk menjepit, memotong, dan melilit kawat.",spek:["Panjang 8 inci","Baja krom vanadium","Gagang berlapis karet"]}
+];
+const rp=n=>"Rp "+n.toLocaleString("id-ID");
+const img=p=>S(p.bg,ICON[p.ic]);
+
+/* ===== STATE (disimpan di localStorage bila tersedia) ===== */
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let cart=store.get("tj_cart",{});
+let user=store.get("tj_user",null);
+const save=()=>{store.set("tj_cart",cart);store.set("tj_user",user)};
+const $=s=>document.querySelector(s);
+const app=$("#app");
+
+function head(){
+ $("#cnt").textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+ const l=$("#loginLink");l.textContent=user?"Keluar ("+user.nama+")":"Masuk";
+ l.href=user?"#/keluar":"#/login";
+}
+
+/* ===== HALAMAN ===== */
+function home(filter="Semua"){
+ const cats=["Semua",...new Set(P.map(p=>p.kat))];
+ const list=P.filter(p=>filter=="Semua"||p.kat==filter);
+ app.innerHTML=`<section class="hero"><h1>Alat kuat,<br>bangunan beres.</h1><p>Perkakas, material, dan perlengkapan keselamatan untuk proyek Anda. Pilih produk, tambahkan ke keranjang, selesai.</p><div><a class="btn" href="#/produk/${P[1].id}">Lihat bor listrik</a></div></section>
+ <div class="filters">${cats.map(c=>`<button class="${c==filter?"on":""}" data-c="${c}">${c}</button>`).join("")}</div>
+ <div class="grid">${list.map(p=>`<a class="card" href="#/produk/${p.id}"><div class="img" style="background:${p.bg}">${img(p)}</div><div class="t"><h3>${p.nama}</h3><div class="price">${rp(p.harga)}</div></div></a>`).join("")}</div>`;
+ app.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>home(b.dataset.c));
+}
+
+function produk(id){
+ const p=P.find(x=>x.id==id);if(!p)return notFound();
+ let q=1;
+ app.innerHTML=`<p class="crumb"><a href="#/">Produk</a> / ${p.kat} / ${p.nama}</p>
+ <div class="detail"><div class="pimg" style="background:${p.bg}">${img(p)}</div>
+ <div><h1>${p.nama}</h1><p class="price" style="font-size:28px">${rp(p.harga)}</p><p>${p.desk}</p>
+ <ul>${p.spek.map(s=>`<li>${s}</li>`).join("")}</ul>
+ <div class="qty"><button id="m" aria-label="Kurangi">−</button><b id="q">1</b><button id="pl" aria-label="Tambah">+</button></div>
+ <button class="btn" id="add">Tambah ke keranjang</button> <a class="btn alt" href="#/">Kembali</a><p class="msg" id="ok" style="color:var(--b)"></p></div></div>
+ <h2 style="margin:36px 0 12px;font-size:32px">Produk lain</h2>
+ <div class="grid">${P.filter(x=>x.id!=id).slice(0,4).map(x=>`<a class="card" href="#/produk/${x.id}"><div class="img" style="background:${x.bg}">${img(x)}</div><div class="t"><h3>${x.nama}</h3><div class="price">${rp(x.harga)}</div></div></a>`).join("")}</div>`;
+ $("#m").onclick=()=>{q=Math.max(1,q-1);$("#q").textContent=q};
+ $("#pl").onclick=()=>{q++;$("#q").textContent=q};
+ $("#add").onclick=()=>{cart[p.id]=(cart[p.id]||0)+q;save();head();$("#ok").textContent=q+" × "+p.nama+" masuk keranjang."};
+}
+
+function keranjang(){
+ const rows=Object.entries(cart).map(([id,n])=>({p:P.find(x=>x.id==id),n}));
+ if(!rows.length){app.innerHTML=`<h1>Keranjang kosong</h1><p>Belum ada produk. <a href="#/">Mulai belanja</a></p>`;return}
+ const total=rows.reduce((a,r)=>a+r.p.harga*r.n,0);
+ app.innerHTML=`<h1 style="font-size:48px">Keranjang</h1><div style="overflow-x:auto"><table><tr><th>Produk</th><th>Jumlah</th><th>Subtotal</th><th></th></tr>
+ ${rows.map(r=>`<tr><td><a href="#/produk/${r.p.id}">${r.p.nama}</a></td><td>${r.n}</td><td>${rp(r.p.harga*r.n)}</td><td><button class="btn alt" style="padding:0 12px;font-size:16px" data-d="${r.p.id}">Hapus</button></td></tr>`).join("")}
+ <tr><th colspan="2">Total</th><th colspan="2">${rp(total)}</th></tr></table></div><p style="margin-top:16px"><button class="btn" id="co">Checkout</button></p><p class="msg" id="ok"></p>`;
+ app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{delete cart[b.dataset.d];save();head();keranjang()});
+ $("#co").onclick=()=>{
+  if(!user){location.hash="#/login";return}
+  cart={};save();head();app.innerHTML=`<h1>Pesanan diterima</h1><p>Terima kasih, ${user.nama}. Kami akan menghubungi Anda untuk pengiriman.</p><a class="btn" href="#/">Belanja lagi</a>`;
+ };
+}
+
+function login(){
+ app.innerHTML=`<div class="box"><h1>Masuk</h1><p>Masuk untuk menyelesaikan pesanan.</p>
+ <form id="f"><label>Email<input type="email" id="e" required autocomplete="email"></label>
+ <label>Kata sandi<input type="password" id="pw" required minlength="6" autocomplete="current-password"></label>
+ <p class="msg" id="err"></p><button class="btn" type="submit" style="width:100%">Masuk</button></form>
+ <p style="margin-top:14px;font-size:14px">Akun demo: <b>admin@tukangjaya.com</b> / <b>tukang123</b>. Atau isi email dan sandi (min. 6 karakter) apa saja untuk mendaftar otomatis.</p></div>`;
+ $("#f").onsubmit=ev=>{
+  ev.preventDefault();
+  const e=$("#e").value.trim(),pw=$("#pw").value;
+  if(pw.length<6){$("#err").textContent="Kata sandi minimal 6 karakter.";return}
+  user={email:e,nama:e.split("@")[0]};save();head();location.hash="#/";
+ };
+}
+
+function notFound(){app.innerHTML=`<h1>Halaman tidak ditemukan</h1><p><a href="#/">Kembali ke daftar produk</a></p>`}
+
+/* ===== ROUTER ===== */
+function route(){
+ const h=location.hash.replace(/^#\/?/,"").split("/");
+ head();window.scrollTo(0,0);
+ if(h[0]=="produk")produk(h[1]);
+ else if(h[0]=="keranjang")keranjang();
+ else if(h[0]=="login")login();
+ else if(h[0]=="keluar"){user=null;save();location.hash="#/"}
+ else if(h[0]==""||h[0]=="")home();
+ else notFound();
+}
+addEventListener("hashchange",route);route();
+</script>
+</body>
+</html>
